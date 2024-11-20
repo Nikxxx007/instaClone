@@ -45,9 +45,9 @@ This project is a full-stack Instagram clone built using Next.js for the fronten
 2. **Install dependencies:**
 
    ```bash
-   npm install
+   yarn
    cd ../server
-   npm install
+   yarn
    ```
 3. **Set up environment variables:**
 Create a .env file in the server directory and add your MongoDB connection string and JWT secret:
@@ -60,13 +60,13 @@ Create a .env file in the server directory and add your MongoDB connection strin
 4. **Run the backend server:**
 
    ```bash
-   npm run start:dev
+   yarn start:dev
    ````
    
 5. Run the frontend development server:
 
    ```bash
-   npm run dev
+   yarn dev
    ```
    
 6. **Open your browser:**
@@ -76,14 +76,16 @@ Navigate to http://localhost:3000 to see the application in action.
 
 Contributions are welcome! Please fork the repository and create a pull request with your changes. Make sure to follow the coding standards and include relevant tests.
 
+
 **License**
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-**Acknowledgments**
 
+**Acknowledgments**
 Inspired by the features and design of Instagram.
 Built with the help of various open-source libraries and frameworks.
+
 
 **Contact**
 For any questions or suggestions, feel free to reach out to your-email@example.com.
