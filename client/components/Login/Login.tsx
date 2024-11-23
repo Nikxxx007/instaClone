@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, Box } from '@mui/material';
-import axios from 'axios';
+import { login } from '../../services/auth.service';
+import { useRouter } from 'next/router';
 
-interface LoginProps {}
-
-export const Login: React.FC<LoginProps> = () => {
+export const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/auth/login', { email, password });
-      console.log(response.data);
+      await login({ email, password });
+      router.push('/profile');
     } catch (error) {
       console.error('Error logging in:', error);
     }
