@@ -88,6 +88,6 @@ Built with the help of various open-source libraries and frameworks.
 
 
 **Contact**
-For any questions or suggestions, feel free to reach out to your-email@example.com.
+For any questions or suggestions, feel free to reach out to nick.nefed@gmail.com.
 
 
