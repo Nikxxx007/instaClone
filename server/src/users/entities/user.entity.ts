@@ -19,6 +19,9 @@ export class User {
   @Column({ unique: true })
   email: string;
 
+  @Column()
+  isActive: boolean;
+
   @CreateDateColumn()
   createdAt: Date;
 }

@@ -1,4 +1,10 @@
-import { IsString, IsEmail, MinLength } from 'class-validator';
+import {
+  IsBoolean,
+  IsEmail,
+  IsOptional,
+  IsString,
+  MinLength,
+} from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
@@ -11,4 +17,8 @@ export class CreateUserDto {
   @IsString()
   @MinLength(6, { message: 'Пароль должен быть не менее 6 символов' })
   password: string;
+
+  @IsBoolean()
+  @IsOptional()
+  isActive?: boolean; // Optional field with a default value in the entity
 }
