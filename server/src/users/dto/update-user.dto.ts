@@ -1,27 +1,27 @@
-import {
-  IsString,
-  IsEmail,
-  MinLength,
-  IsBoolean,
-  IsOptional,
-} from 'class-validator';
+import { IsString, IsEmail, IsBoolean, IsOptional } from 'class-validator';
 
 export class UpdateUserDto {
   @IsString()
-  @MinLength(3)
-  @IsOptional()
+  @IsOptional() // Поле необязательное
   username?: string;
 
-  @IsString()
-  @MinLength(6)
-  @IsOptional()
-  password?: string;
-
   @IsEmail()
-  @IsOptional()
+  @IsOptional() // Поле необязательное
   email?: string;
 
+  @IsString()
+  @IsOptional() // Поле необязательное
+  password?: string;
+
+  @IsString()
+  @IsOptional() // Поле необязательное
+  bio?: string;
+
+  @IsString()
+  @IsOptional() // Поле необязательное
+  avatarUrl?: string;
+
   @IsBoolean()
-  @IsOptional()
-  isActive?: boolean;
+  @IsOptional() // Поле необязательное
+  is_active?: boolean;
 }

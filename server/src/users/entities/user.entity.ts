@@ -1,9 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
 export class User {
@@ -13,15 +8,21 @@ export class User {
   @Column({ unique: true })
   username: string;
 
-  @Column()
-  password: string;
-
   @Column({ unique: true })
   email: string;
 
   @Column()
-  isActive: boolean;
+  password: string;
 
-  @CreateDateColumn()
+  @Column({ nullable: true })
+  bio: string;
+
+  @Column({ default: '' })
+  avatarUrl: string;
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
+
+  @Column({ default: true }) // По умолчанию пользователь активен
+  is_active: boolean;
 }

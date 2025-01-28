@@ -1,33 +1,26 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './users/entities/user.entity';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    // Инициализация ConfigModule
-    ConfigModule.forRoot({
-      isGlobal: true, // Делаем модуль глобальным (не нужно импортировать в других модулях)
-    }),
-
-    // Настройка TypeOrmModule
+    ConfigModule.forRoot(), // Подключаем ConfigModule для работы с .env
     TypeOrmModule.forRootAsync({
-      useFactory: () => ({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        host: process.env.DB_HOST,
-        port: parseInt(process.env.DB_PORT, 10),
-        username: process.env.DB_USERNAME,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME,
-        autoLoadEntities: true, // Автоматически загружает сущности
-        synchronize: true, // Автоматически синхронизирует структуру БД (в продакшене отключить!)
+        host: configService.get('DB_HOST'),
+        port: +configService.get('DB_PORT'),
+        username: configService.get('DB_USERNAME'),
+        password: configService.get('DB_PASSWORD'),
+        database: configService.get('DB_DATABASE'),
+        entities: [User], // Подключаем сущности
+        synchronize: true, // Автоматически создает таблицы (только для разработки!)
       }),
+      inject: [ConfigService],
     }),
+    // UserModule, // Подключаем модуль пользователя
   ],
 })
-
-// @Module({
-//   imports: [AuthModule, UsersModule, DatabaseModule],
-//   controllers: [AppController],
-//   providers: [AppService],
-// })
 export class AppModule {}
