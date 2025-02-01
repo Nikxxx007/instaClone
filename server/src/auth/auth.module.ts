@@ -3,7 +3,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { UsersModule } from '../users/users.module';
 import { AuthService } from './auth.service';
-// import { JwtStrategy } from './strategies/jwt.strategy';
+import { JwtStrategy } from './strategies/jwt.strategy';
 import { AuthController } from './auth.controller';
 
 @Module({
@@ -11,7 +11,7 @@ import { AuthController } from './auth.controller';
     UsersModule, // Модуль пользователей
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
-      secret: 'your_secret_key', // Секретный ключ для подписи токена
+      secret: process.env.JWT_SECRET, // Секретный ключ для подписи токена
       signOptions: { expiresIn: '1h' }, // Время жизни токена
     }),
   ],
