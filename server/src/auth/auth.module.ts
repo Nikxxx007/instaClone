@@ -5,14 +5,19 @@ import { UsersModule } from '../users/users.module';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { AuthController } from './auth.controller';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    UsersModule, // Модуль пользователей
+    UsersModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
-    JwtModule.register({
-      secret: process.env.JWT_SECRET, // Секретный ключ для подписи токена
-      signOptions: { expiresIn: '1h' }, // Время жизни токена
+    JwtModule.registerAsync({
+      imports: [ConfigModule], // Импортируем ConfigModule
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get('JWT_SECRET'), // Читаем ключ из переменных окружения
+        signOptions: { expiresIn: '1h' },
+      }),
+      inject: [ConfigService], // Внедряем ConfigService
     }),
   ],
   providers: [AuthService, JwtStrategy],
