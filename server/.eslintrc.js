@@ -21,6 +21,13 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
-    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        varsIgnorePattern: '^_', // Игнорирует переменные, начинающиеся с "_"
+        argsIgnorePattern: '^_', // Игнорирует аргументы, начинающиеся с "_"
+        destructuredArrayIgnorePattern: '^_', // Игнорирует деструктурированные переменные с "_"
+      },
+    ],
   },
 };
