@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import { RegisterDto } from './dto/register.dto';
@@ -7,6 +7,8 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
+  private readonly logger = new Logger(AuthService.name);
+
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
@@ -22,6 +24,7 @@ export class AuthService {
   }
 
   async login(loginDto: LoginDto) {
+    this.logger.log(`User ${loginDto.email} is trying to login`);
     const user = await this.validateUser(loginDto.email, loginDto.password);
     if (!user) {
       throw new Error('Invalid credentials');
@@ -33,6 +36,7 @@ export class AuthService {
   }
 
   async register(registerDto: RegisterDto) {
+    this.logger.log(`User ${registerDto.email} is trying to register`);
     const hashedPassword = await bcrypt.hash(registerDto.password, 10);
     const newUser = await this.usersService.create({
       ...registerDto,
