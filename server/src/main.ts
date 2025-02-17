@@ -14,6 +14,13 @@ async function bootstrap() {
     }),
   );
 
+  // Включаем CORS
+  app.enableCors({
+    origin: 'http://localhost:3001', // Разрешаем запросы с фронта
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // Если используешь cookies или авторизацию
+  });
+
   await app.listen(3000);
 }
 bootstrap();
