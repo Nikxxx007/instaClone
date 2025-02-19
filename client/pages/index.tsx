@@ -5,7 +5,6 @@ const Home: React.FC = () => {
   return (
     <div>
       <Login />
-      {/*<Register />*/}
       {/*<Post*/}
       {/*  username="john_doe"*/}
       {/*  profilePicture="https://via.placeholder.com/150"*/}
