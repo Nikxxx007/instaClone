@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { TextField, Button, Container, Typography, Box } from '@mui/material';
-import { login } from '../../services/auth.service';
-import { useRouter } from 'next/router';
+import React, { useState } from "react";
+import { TextField, Button, Container, Typography, Box } from "@mui/material";
+import { login } from "@/services/auth.service";
+import { useRouter } from "next/router";
 
 export const Login: React.FC = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       await login({ email, password });
-      router.push('/profile');
+      router.push("/feed");
     } catch (error) {
-      console.error('Error logging in:', error);
+      console.error("Error logging in:", error);
     }
   };
 
@@ -23,9 +23,9 @@ export const Login: React.FC = () => {
       <Box
         sx={{
           marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
         <Typography component="h1" variant="h5">
